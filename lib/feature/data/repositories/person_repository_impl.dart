@@ -11,7 +11,7 @@ import 'package:flutter_application/feature/domain/repositories/person_repositor
 class PersonRepositoryImpl implements PersonRepository {
   final PersonRemoteDataSource remoteDataSource;
   final PersonLocalDataSource localDataSource;
-  final NetWorkInfoImpl networkInfo;
+  final NetworkInfo networkInfo;
 
   PersonRepositoryImpl({
     required this.remoteDataSource,
@@ -41,14 +41,14 @@ class PersonRepositoryImpl implements PersonRepository {
         localDataSource.personsToCache(remotePerson);
         return Right(remotePerson);
       } on ServerException {
-        return Left(ServerFailur());
+        return Left(ServerFailure());
       }
     } else {
       try {
         final localPerson = await localDataSource.getLastPersonsFromCache();
         return Right(localPerson);
       } on CacheException {
-        return Left(CacheFailur());
+        return Left(CacheFailure());
       }
     }
   }

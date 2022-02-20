@@ -11,7 +11,7 @@ import 'locator_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
-  runApp( const MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -22,15 +22,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<PersonListCubit>(
-          create: (context) => sl<PersonListCubit>()..loadPerson(),
-        ),
+            create: (context) => sl<PersonListCubit>()..loadPerson()),
         BlocProvider<PersonSearchBloc>(
-          create: (context) => sl<PersonSearchBloc>(),
-        )
+            create: (context) => sl<PersonSearchBloc>()),
       ],
       child: MaterialApp(
-        theme: ThemeData.dark().copyWith(backgroundColor: AppColors.mainBackground,
-        scaffoldBackgroundColor: AppColors.mainBackground),
+        theme: ThemeData.dark().copyWith(
+          backgroundColor: AppColors.mainBackground,
+          scaffoldBackgroundColor: AppColors.mainBackground,
+        ),
         home: const HomePage(),
       ),
     );

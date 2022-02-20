@@ -1,18 +1,20 @@
+import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:flutter_application/core/platform/network_info.dart';
 import 'package:flutter_application/feature/data/datasources/person_local_data_sources.dart';
 import 'package:flutter_application/feature/data/datasources/person_remote_data_source.dart';
-import 'package:flutter_application/feature/data/repositories/person_repository_impl.dart';
 import 'package:flutter_application/feature/domain/repositories/person_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'feature/domain/usecases/search_person.dart';
+import 'package:flutter_application/feature/data/repositories/person_repository_impl.dart';
 import 'package:flutter_application/feature/domain/usecases/get_all_persons.dart';
 import 'package:flutter_application/feature/presentation/bloc/person_list_cubit/person_list_cubit.dart';
 import 'package:flutter_application/feature/presentation/bloc/search_bloc/search_bloc.dart';
-import 'package:flutter_application/feature/presentation/bloc/search_bloc/search_event.dart';
-import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'feature/domain/usecases/search_person.dart';
+
+
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -46,10 +48,11 @@ Future<void> init() async {
   sl.registerLazySingleton<PersonLocalDataSource>(
     () => PersonLocalDataSourceImpl(sharedPreferences: sl()),
   );
+  
 
   // Core
-  sl.registerLazySingleton<NetWorkInfo>(
-    () => NetWorkInfoImpl(sl()),
+ sl.registerLazySingleton<NetworkInfo>(
+    () => NetworkInfoImp(sl()),
   );
 
   // External
@@ -57,4 +60,4 @@ Future<void> init() async {
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker());
-}
+} 

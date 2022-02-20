@@ -3,6 +3,7 @@ import 'package:flutter_application/feature/domain/entities/person_entity.dart';
 
 abstract class PersonSearchState extends Equatable {
   const PersonSearchState();
+
   @override
   List<Object> get props => [];
 }
@@ -20,13 +21,11 @@ class PersonSearchLoaded extends PersonSearchState {
   List<Object> get props => [persons];
 }
 
-
 class PersonSearchError extends PersonSearchState {
   final String message;
 
   const PersonSearchError({required this.message});
 
   @override
-  
   List<Object> get props => [message];
 }

@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 
 abstract class PersonRemoteDataSource {
   
-  
   Future<List<PersonModel>> getAllPersons(int page);
 
   
